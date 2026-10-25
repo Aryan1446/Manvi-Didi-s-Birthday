@@ -41,6 +41,11 @@ const config = {
   // REPLACE ME: number of candles on the cake
   candleCount: 5,
 
+  // REPLACE ME: her birthday — the gift stays locked behind a countdown until
+  // midnight (her phone's time) on this date. month is 1-12.
+  // Tip: add ?preview to the URL to skip the lock while testing.
+  birthday: { year: 2026, month: 10, day: 27, hour: 0 },
+
   // ---------------- Every text string on the site ----------------
   text: {
     nav: { next: "Next", music: "Toggle music" },
@@ -50,6 +55,9 @@ const config = {
       line2: "Manvi Didi, this is for YOU", // REPLACE ME
       button: "Open it",
       hint: "turn your sound on",
+      lockedLine: "Not yet, Didi! Your gift unlocks in",
+      units: ["days", "hrs", "mins", "secs"],
+      unlocked: "It's time!",
     },
 
     welcome: {

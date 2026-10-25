@@ -1,15 +1,28 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import config from "@/config";
 import { bigCelebration } from "@/lib/fx";
+import { Countdown, useBirthdayCountdown } from "./Countdown";
 
 const t = config.text.landing;
 
 export default function Landing({ onOpen }) {
   const [opening, setOpening] = useState(false);
+  const left = useBirthdayCountdown();
+  const locked = left > 0;
+  const wasLocked = useRef(locked);
+  const [justUnlocked, setJustUnlocked] = useState(false);
+
+  useEffect(() => {
+    if (wasLocked.current && !locked) {
+      setJustUnlocked(true);
+      bigCelebration();
+    }
+    wasLocked.current = locked;
+  }, [locked]);
 
   const open = () => {
-    if (opening) return;
+    if (opening || locked) return;
     setOpening(true);
     bigCelebration();
     onOpen();
@@ -48,6 +61,9 @@ export default function Landing({ onOpen }) {
         {t.line2}
       </h1>
 
+      {locked ? <Countdown ms={left} /> : (
+      <>
+      {justUnlocked && <motion.p data-testid="gift-unlocked-text" initial={{ scale: 0.5 }} animate={{ scale: 1 }} className="mt-6 font-hand text-3xl text-blush-500">{t.unlocked}</motion.p>}
       <motion.button
         data-testid="open-gift-button"
         onClick={open}
@@ -60,6 +76,8 @@ export default function Landing({ onOpen }) {
         {t.button}
       </motion.button>
       <p className="mt-4 font-body text-xs font-semibold uppercase tracking-[0.2em] text-plum-soft">{t.hint}</p>
+      </>
+      )}
     </div>
   );
 }
