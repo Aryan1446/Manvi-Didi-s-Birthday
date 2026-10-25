@@ -43,6 +43,14 @@ export default function App() {
     setTimeout(() => setStep(1), 1100);
   };
 
+  const restart = () => {
+    const a = audioRef.current;
+    a.pause();
+    a.currentTime = 0;
+    setStep(0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const next = () => {
     setStep((s) => Math.min(s + 1, SECTIONS.length - 1));
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -57,7 +65,7 @@ export default function App() {
       <ProgressDots total={SECTIONS.length} current={step} />
       <AnimatePresence mode="wait">
         <SectionWrapper key={key} testId={`section-${key}`}>
-          <Comp onOpen={open} />
+          <Comp onOpen={open} onRestart={restart} />
         </SectionWrapper>
       </AnimatePresence>
       {step > 0 && step < SECTIONS.length - 1 && <NextButton onClick={next} />}

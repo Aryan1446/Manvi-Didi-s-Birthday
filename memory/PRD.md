@@ -4,5 +4,6 @@ Original ask: cute, mobile-first, frontend-only (React + Tailwind + Framer Motio
 - 8 sections via one SectionWrapper (spring fade/slide): Landing gift (confetti + music start), Welcome typewriter, Cake (mic blow via Web Audio + tap fallback, smoke, popup, relight twist), Polaroid gallery + swipe/arrow/keyboard lightbox (lazy images), Envelope note (Caveat, rising hearts), Rage-bait corner (runaway 21 btn, endless age loader, sibling Yes/No, 99% gift, Do NOT press alert, counter, heart stars), Scratch-card surprise, Sorry page (runaway No, heart rain).
 - Global: dot progress, Next button, spinning vinyl music toggle, tap sparkles, floating hearts/stars.
 - Placeholders: public/assets/song.mp3 (silent), photos/photo1-8.jpg, surprise.jpg.
+- (2026-10-25) "Watch it again" replay button on Sorry page after forgiving: stops/rewinds music and returns to Landing.
 ## Backlog
 - User to replace song/photos/note/name in config.js

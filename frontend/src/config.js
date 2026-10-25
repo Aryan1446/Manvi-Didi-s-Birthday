@@ -115,6 +115,7 @@ const config = {
       forgive: "Forgive me",
       no: "No",
       thanks: "Thank you, Didi! Love you loads.",
+      replay: "Watch it again",
     },
   },
 };

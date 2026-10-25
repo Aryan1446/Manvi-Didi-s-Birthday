@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
+import { Heart, RotateCcw } from "lucide-react";
 import config from "@/config";
 import { bigCelebration } from "@/lib/fx";
 import { useRunaway } from "./useRunaway";
@@ -19,7 +19,7 @@ const HeartRain = () => (
   </div>
 );
 
-export default function Sorry() {
+export default function Sorry({ onRestart }) {
   const [forgiven, setForgiven] = useState(false);
   const { pos, dodges, done, dodge } = useRunaway({ x: 70, y: 50 }, 6);
 
@@ -43,6 +43,19 @@ export default function Sorry() {
         <motion.p data-testid="sorry-thanks" initial={{ scale: 0.4, opacity: 0 }} animate={{ scale: 1, opacity: 1, transition: { type: "spring", bounce: 0.6 } }} className="relative z-40 mt-10 font-heading text-4xl font-semibold text-blush-500 sm:text-5xl">
           {t.thanks}
         </motion.p>
+      ) : null}
+      {forgiven ? (
+        <motion.button
+          data-testid="sorry-replay-button"
+          onClick={onRestart}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0, transition: { delay: 1.8 } }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.92 }}
+          className="relative z-40 mt-8 flex items-center gap-2 rounded-full bg-lilac-400 px-8 py-4 font-heading text-xl text-white shadow-pop"
+        >
+          <RotateCcw className="h-5 w-5" /> {t.replay}
+        </motion.button>
       ) : (
         <div className="relative mt-8 h-44 w-full max-w-md">
           <motion.button data-testid="sorry-forgive-button" onClick={forgive} whileTap={{ scale: 0.9 }} style={{ x: "-50%", y: "-50%" }} animate={{ scale: 1 + dodges * 0.08 }} className="absolute left-[30%] top-1/2 rounded-full bg-blush-500 px-8 py-4 font-heading text-xl text-white shadow-pop">
